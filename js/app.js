@@ -5,24 +5,20 @@
 
 
 
-let game ='';
-const startBtn = document.getElementById("btn__reset");
+const startButton = document.getElementById("btn__reset"); 
+let game;
+
+startButton.addEventListener("click", () =>{
+    game = new Game();
+    game.startGame();
+})
 
 
-startBtn.addEventListener('click', function() {
- game = new Game()
- game.resetGame();
- game.startGame();
+const keyboardKeys = document.querySelectorAll('.key');
 
-});
-
-let buttons = document.querySelectorAll('.key');
-
-buttons.forEach(button =>{
-
-    button.addEventListener('click', function() {
-    game.handleInteraction(this)
-          
-        })
-
+keyboardKeys.forEach(button => {
+    button.addEventListener('click', () =>{
+        game.handleInteraction(button)
+        }
+    )
 })
