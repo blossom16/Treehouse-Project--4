@@ -8,11 +8,11 @@ class Game  {
     constructor () {
     this.missed = 0;
     this.phrases = [
-    ('More to come'),
-    ('Team work makes the dream work'),
-    ('You wont break my soul'),
-    ('It is what it is'),
-    ('early bird gets the worm')
+    new Phrase('More to come'),
+    new Phrase('Team work makes the dream work'),
+    new Phrase('You wont break my soul'),
+    new Phrase('It is what it is'),
+    new Phrase('early bird gets the worm')
     ];
     this.activePhrase = null;
     
@@ -74,6 +74,8 @@ gameOver(gameWon) {
           screenOverlay.className = "lose";
           message.innerHTML = "Better luck next time!";
         }
+        this.resetGame();
+
       }
 
 
