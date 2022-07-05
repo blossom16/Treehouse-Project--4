@@ -23,13 +23,13 @@ class Game  {
 getRandomPhrase(){
     let randomPhrase = Math.floor(Math.random() * this.phrases.length);
         return this.phrases[randomPhrase];    
-        };
+    };
 
 
 
-//Begins game by hiding start screen overlay
+//Begins game by selecting a random phrase & displaying it to the user
 startGame() {
-    const ScreenOverlay = document.querySelector('div#overlay');
+    const ScreenOverlay = document.querySelector('#overlay');
     ScreenOverlay.style.display = 'none';
     this.activePhrase = this.getRandomPhrase();
     this.activePhrase.addPhraseToDisplay();
@@ -56,7 +56,7 @@ checkForWin() {
     } else {
         return false;
     }
-};
+}
 
 
 
@@ -77,23 +77,39 @@ gameOver(gameWon) {
       }
 
 
- resetGame() {
-    let scoreBoard = document.querySelectorAll("img");
-    const getDiv = document.getElementById('phrase')
-    const ul = getDiv.querySelector('ul');
-    let buttons = document.querySelectorAll('.key');
-    
-    buttons.forEach(button => {
-    button.classList.remove('chosen');
-    button.classList.remove('wrong');
-    button.classList.add('key');
-    button.disabled = false;
-    
-    })
+handleInteraction(button) {
        
-    scoreBoard.forEach(score => {
-    score.src = "images/liveHeart.png";
-    });
+    button.disabled = true;
+    if (this.activePhrase.checkLetter(button.innerHTML)) {
+    this.activePhrase.showMatchedLetter(button.innerHTML);
+    button.classList.add('chosen');
+        if(this.checkForWin() === true) {
+            this.gameOver(true);
+        };
+        } else {            
+            button.classList.add('wrong');
+           
+            this.removeLife();
+        }       
+    };   
+
     
- }
+resetGame() {
+    let removeLi = document.querySelector('#phrase ul');
+        removeLi.innerHTML = '';
+    let keyboard = document.querySelectorAll('.key');
+        keyboard.forEach(button => {
+        button.disabled = false;
+        button.classList.add('key');
+        button.classList.remove('chosen')
+        button.classList.remove('wrong') 
+        })
+
+   
+    let resetHearts = document.querySelectorAll('img');
+        resetHearts.forEach(pic => {
+            pic.src = 'images/liveHeart.png';
+        })
+    };
+    
 }

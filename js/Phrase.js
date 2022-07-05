@@ -11,7 +11,7 @@ class Phrase {
 
 //Displays phrase on game board
 addPhraseToDisplay() {
-    const phraseDisplay = document.querySelector('div#phrase ul');
+    const phraseDisplay = document.querySelector('#phrase ul');
     
         for (let i = 0; i < this.phrase.length; i++) {
           if (this.phrase[i] === ' ') {

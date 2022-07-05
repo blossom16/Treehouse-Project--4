@@ -4,21 +4,20 @@
 
 
 
-
+let game = '';
 const startButton = document.getElementById("btn__reset"); 
-let game;
 
-startButton.addEventListener("click", () =>{
+startButton.addEventListener("click", (e) => {
     game = new Game();
     game.startGame();
 })
 
 
-const keyboardKeys = document.querySelectorAll('.key');
-
-keyboardKeys.forEach(button => {
-    button.addEventListener('click', () =>{
-        game.handleInteraction(button)
-        }
-    )
-})
+const keyboard = document.getElementById('qwerty');
+keyboard.addEventListener('click', (e) => {
+    
+    if (e.target.tagName === 'BUTTON') {
+        
+        game.handleInteraction(e.target);
+    }
+});
